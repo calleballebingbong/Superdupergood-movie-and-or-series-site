@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="site.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header-main">
+        <div class="header-main-logo">
+            <img src="logo.svg" alt="logo" class="logo">
+            <nav class="header-main-nav">
+                <ul>
+                    <li><a href="homepage.html">HOME</a></li>
+                    <li><a href="movies.html">MOVIES</a></li>
+                    <li><a href="#">ABOUT US</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+        <input id="menuSearch" class="search-input" type="text" placeholder="Search for a movie..." onkeyup="menuSearchbar()">
+        <div class="header-main-sm">
+            <div class="header-main-sm-ig"></div>
+            <div class="header-main-sm-yt"></div>
+        </div>
+    </header>
+
+    <div id="searchresults"></div>
+    <script src="tmbdapi.js"></script>
+</body>
+</html>
