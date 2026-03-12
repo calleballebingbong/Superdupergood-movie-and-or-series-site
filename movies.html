@@ -23,8 +23,11 @@
                 </ul>
             </nav>
         </div>
-        <input id="menuSearch" class="search-input" type="text" placeholder="Search for a movie..." onkeyup="menuSearchbar()">
-        <div class = "menu-search-results" id="menuSearchResults"></div>
+        <input onblur="hidesearch()" id="menuSearch" class="search-input" type="text" placeholder="Search for a movie..." onkeyup="menuSearchbar()">
+        <div class = "menu-search-results" id="menuSearchResults">
+            <div id="searchresults"></div>
+
+        </div>
         <div class="header-main-sm">
             <div class="header-main-sm-ig"></div>
             <div class="header-main-sm-yt"></div>
@@ -38,12 +41,13 @@
         <form>
             <input type="text" id="txtSearch" placeholder="Search for movies" />
         </form>
-
-        <!--Results-->
-        <h2>Results</h2>
-        </div>
-    <div id="searchresults"></div>
     <script src="tmbdapi.js"></script>
+    <script>
+        function hidesearch() {
+            document.getElementById("menuSearchResults").style.visibility = "hidden";
+        }
+    </script>
+
 </body>
 
 

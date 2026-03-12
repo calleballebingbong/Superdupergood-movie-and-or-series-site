@@ -39,7 +39,7 @@ async function handleTopSearch() {
     renderResults(results);
   } else if (searchTerm.length === 0) {
     // Clear results when search is empty
-    document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchMenuResults").innerHTML = "";
   }
 }
 
@@ -48,10 +48,13 @@ async function menuSearchbar() {
   let menuSearch = document.getElementById("menuSearch");
   let searchTerm = menuSearch.value.trim();
   if (searchTerm.length > 0) {
+    document.getElementById("menuSearchResults").style.visibility = "visible";
     let results = await search(searchTerm);
-    renderResults(results);
+    renderMenuResults(results);
   } else if (searchTerm.length === 0) {
-  document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("searchresults").innerHTML = "";
+    document.getElementById("menuSearchResults").style.visibility = "hidden";
+
   }
 }
 
@@ -59,7 +62,7 @@ async function menuSearchbar() {
 async function search(searchString) {
 
   //URL för API anrop
-  let apiKey = "";
+  let apiKey = "57ef83c271a0b7aa58d9570361e9141a";
   var url = `https://api.themoviedb.org/3/search/movie?query=${searchString}&api_key=${apiKey}`;
   console.log("Calling URL: ", url);
 
@@ -96,5 +99,41 @@ function renderResults(results) {
       resultDiv.innerHTML += `<p>No image available</p>`;
     }
     resultDiv.innerHTML += `<p class="movie-title">${allObjects[index].original_title}</p>`;
+  }
+}
+
+function renderMenuResults(results) {
+  let resultDiv = document.getElementById("searchresults");
+  console.log("results: ", results);
+  let allObjects = results.results;
+  console.log(allObjects);
+  resultDiv.innerHTML = "";
+
+
+  if (allObjects.length === 0) {
+    console.log("No results found");
+    resultDiv.innerHTML = "<p>No results found</p>";
+    return;
+  }
+
+  for (let index = 0; index < allObjects.length; index++) {
+    const object = allObjects[index];
+    console.log("looping through objects", object);
+    //Objects results:
+    if (object.poster_path) {
+      resultDiv.innerHTML += `
+      <div class="menu-result-item">
+      <img class="Menu-movie-poster" src="https://image.tmdb.org/t/p/w500${object.poster_path}" width="25%"></img>
+      <p class="Menu-movie-title">${object.original_title}</p>
+      </div>
+      `;
+    } else {
+      resultDiv.innerHTML += `
+      <div class="menu-result-item">
+      <img class="Menu-movie-poster" src="placeholder.png" width="25%"></img>
+      <p class="Menu-movie-title">${object.original_title}</p>
+      </div>
+      `;
+    }
   }
 }

@@ -131,23 +131,22 @@ a {
 }
 
 .menu-search-results {
-    /* make sure the container is visible even when empty */
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    background-color: white;
-
-    /* position the dropdown below the header and give it a width */
     position: absolute;
-    top: 60px;              /* header height */
-    right: 10px;            /* align with search input's right edge */
-    width: 400px;
-    min-height: 30px;
+    top: 55px;
+    right: 220px;
+    width: 300px;
+    height: 300px;
+
+    max-height: 250px;
     padding: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    background-color: white;
+    border: 10px solid#640D14;
     z-index: 1000;
+
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
 }
 
 #txtSearch {
@@ -161,12 +160,11 @@ a {
 }
 
 #searchresults {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    left: 50%;
-    gap: 20px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 8px;
+    gap: 0; 
 }
 
 .movie-poster {
@@ -185,4 +183,27 @@ a {
     font-weight: 500;
     color: #ffffff;
     text-align: center;
+}
+
+.menu-result-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.Menu-movie-poster {
+    width: 66px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.Menu-movie-title {
+    margin: 0;
+    font-family: 'Rethink Sans', sans-serif;
+    font-weight: 500;
+    color: #000000;
+    text-align: left;
 }
