@@ -24,14 +24,26 @@
                 </ul>
             </nav>
         </div>
-        <input id="menuSearch" class="search-input" type="text" placeholder="Search for a movie...">
+        <input onblur="hidesearch()" id="menuSearch" class="search-input" type="text" placeholder="Search for a movie..." onkeyup="menuSearchbar()">
+        <div class = "menu-search-results" id="menuSearchResults">
+            <div id="searchresults"></div>
+
+        </div>
         <div class="header-main-sm">
             <div class="header-main-sm-ig"></div>
             <div class="header-main-sm-yt"></div>
         </div>
     </header>
+    <button id="backButton" onclick="window.history.back()">Back</button>
 
+    <div id="details"></div>
 
-
+    <script src="tmbdapi.js"></script>
+    <script>
+        function hidesearch() {
+            document.getElementById("menuSearchResults").style.visibility = "hidden";
+        }
+    </script>
+    <script src="movieinfo.js"></script>
 </body>
 </html>

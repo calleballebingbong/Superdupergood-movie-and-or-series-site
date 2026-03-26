@@ -1,7 +1,7 @@
   let searchText = document.getElementById("txtSearch");
   if (searchText) {
   searchText.onkeydown = async function (event) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && searchText.value.trim().length > 0) {
       event.preventDefault();
       let searchTerm = searchText.value; // Hämtar det sökta
       console.log("Searching for:", searchTerm);
@@ -29,31 +29,19 @@ if (queryFromUrl) {
   }
 
 
-// Handle top search bar - searches as you type
-async function handleTopSearch() {
-  let menuSearch = document.getElementById("menuSearch");
-  let searchTerm = menuSearch.value.trim();
-  
-  if (searchTerm.length > 0) {  // length check to avoid unnecessary API calls if needed
-    let results = await search(searchTerm);
-    renderResults(results);
-  } else if (searchTerm.length === 0) {
-    // Clear results when search is empty
-    document.getElementById("searchMenuResults").innerHTML = "";
-  }
-}
-
-
 async function menuSearchbar() {
+  console.log(TMDBapiKey);
   let menuSearch = document.getElementById("menuSearch");
   let searchTerm = menuSearch.value.trim();
+  let menuDiv = document.getElementById("menuSearchResults");
+
   if (searchTerm.length > 0) {
-    document.getElementById("menuSearchResults").style.visibility = "visible";
+    menuDiv.style.visibility = "visible";
     let results = await search(searchTerm);
     renderMenuResults(results);
-  } else if (searchTerm.length === 0) {
-    document.getElementById("searchresults").innerHTML = "";
-    document.getElementById("menuSearchResults").style.visibility = "hidden";
+  } else{
+    menuDiv.innerHTML = "";
+    menuDiv.style.visibility = "hidden";
 
   }
 }
@@ -62,7 +50,7 @@ async function menuSearchbar() {
 async function search(searchString) {
 
   //URL för API anrop
-  let apiKey = "57ef83c271a0b7aa58d9570361e9141a";
+  let apiKey = TMDBapiKey;
   var url = `https://api.themoviedb.org/3/search/movie?query=${searchString}&api_key=${apiKey}`;
   console.log("Calling URL: ", url);
 
@@ -92,18 +80,21 @@ function renderResults(results) {
   for (let index = 0; index < allObjects.length; index++) {
     const object = allObjects[index];
     console.log("looping through objects", object);
-    //Objects results:
-    if (allObjects[index].poster_path) {
-      resultDiv.innerHTML += `<img class="movie-poster" src="https://image.tmdb.org/t/p/w500${allObjects[index].poster_path}" width="10%"></img>`;
-    } else {
-      resultDiv.innerHTML += `<p>No image available</p>`;
-    }
-    resultDiv.innerHTML += `<p class="movie-title">${allObjects[index].original_title}</p>`;
+    const posterSrc = object.poster_path 
+      ? `https://image.tmdb.org/t/p/w500${object.poster_path}`
+      : "placeholder.png";
+    
+    resultDiv.innerHTML += `
+      <div class="movie-item">
+        <img class="movie-poster" src="${posterSrc}" alt="${object.title}">
+        <p class="movie-title"><a href="movieinfo.html?movieId=${object.id}">${object.title}</a></p>
+      </div>
+    `;
   }
 }
 
 function renderMenuResults(results) {
-  let resultDiv = document.getElementById("searchresults");
+  let resultDiv = document.getElementById("menuSearchResults");
   console.log("results: ", results);
   let allObjects = results.results;
   console.log(allObjects);
@@ -124,14 +115,14 @@ function renderMenuResults(results) {
       resultDiv.innerHTML += `
       <div class="menu-result-item">
       <img class="Menu-movie-poster" src="https://image.tmdb.org/t/p/w500${object.poster_path}" width="25%"></img>
-      <p class="Menu-movie-title">${object.original_title}</p>
+      <p class="Menu-movie-title"><a href="movieinfo.html?movieId=${object.id}">${object.title}</a></p>
       </div>
       `;
     } else {
       resultDiv.innerHTML += `
       <div class="menu-result-item">
       <img class="Menu-movie-poster" src="placeholder.png" width="25%"></img>
-      <p class="Menu-movie-title">${object.original_title}</p>
+      <p class="Menu-movie-title"><a href="movieinfo.html?movieId=${object.id}">${object.title}</a></p>
       </div>
       `;
     }
