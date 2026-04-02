@@ -12,6 +12,13 @@
     <script src="Key.js"></script>
 </head>
 <body>
+
+    <style>
+        body{
+            overflow: hidden;
+        }
+    </style>
+    
     <header class="header-main">
         <div class="header-main-logo">
             <img src="logo.svg" alt="logo" class="logo">
@@ -34,9 +41,11 @@
             <div class="header-main-sm-yt"></div>
         </div>
     </header>
-    <button id="backButton" onclick="window.history.back()">Back</button>
+    <button id="backButton" onclick="window.history.back()">&#8592</button>
 
-    <div id="details"></div>
+    <div id="details">
+        <div id="detailstxt"></div>
+    </div>
 
     <script src="tmbdapi.js"></script>
     <script>

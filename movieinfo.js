@@ -24,15 +24,16 @@ async function fetchMovieDetails() {
 
 function displayMovieDetails(movie) {
     document.title = `Details: ${movie.title}`;
-    document.getElementById("details").innerHTML = 
-    `   <h1>${movie.title}</h1>
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title} poster">
-        <p><strong>Release Date:</strong> ${movie.release_date}</p>
-        <p><strong>Rating:</strong> ${movie.vote_average} / 10</p>
-        <p><strong>Overview:</strong> ${movie.overview}</p>
-        <p><strong>Genres:</strong> ${movie.genres.map(genre => genre.name).join(", ")}</p>
-        <a href="homepage.html">Back to Home</a>
-    `;
+    document.getElementById("details").innerHTML = `
+        <img class="info-poster" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title} poster">
+        <div class="info-text-container">
+            <h1>${movie.title}</h1>
+            <p class="info-txt"><strong>Overview:</strong> ${movie.overview}</p>
+            <p><strong>Rating:</strong> ${movie.vote_average} / 10</p>
+            <p><strong>Genres:</strong> ${movie.genres.map(genre => genre.name).join(", ")}</p>
+            <p><strong>Release Date:</strong> ${movie.release_date}</p>
+        </div>
+            `;
 }
     
 window.addEventListener('load', fetchMovieDetails);

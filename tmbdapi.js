@@ -65,11 +65,11 @@ async function search(searchString) {
 
 function renderResults(results) {
   let resultDiv = document.getElementById("searchresults");
+  let searchForDiv = document.getElementById("searchFor");
   console.log("results: ", results);
   let allObjects = results.results;
   console.log(allObjects);
   resultDiv.innerHTML = ""; // återställ sökresultat
-
 
   if (allObjects.length === 0) {
     console.log("No results found");
@@ -86,7 +86,9 @@ function renderResults(results) {
     
     resultDiv.innerHTML += `
       <div class="movie-item">
-        <img class="movie-poster" src="${posterSrc}" alt="${object.title}">
+        <a style="width: 350px;cursor: default;"href="movieinfo.html?movieId=${object.id}">
+        <img class="movie-poster" src="${posterSrc}" alt="${object.title}" loading="lazy"></img>
+        </a>
         <p class="movie-title"><a href="movieinfo.html?movieId=${object.id}">${object.title}</a></p>
       </div>
     `;
@@ -114,14 +116,18 @@ function renderMenuResults(results) {
     if (object.poster_path) {
       resultDiv.innerHTML += `
       <div class="menu-result-item">
-      <img class="Menu-movie-poster" src="https://image.tmdb.org/t/p/w500${object.poster_path}" width="25%"></img>
-      <p class="Menu-movie-title"><a href="movieinfo.html?movieId=${object.id}">${object.title}</a></p>
+      <a href="movieinfo.html?movieId=${object.id}">
+      <img class="Menu-movie-poster" src="https://image.tmdb.org/t/p/w500${object.poster_path}" loading="lazy"></img>
+      </a>
+      <p class="Menu-movie-title"><a class="menu-title" href="movieinfo.html?movieId=${object.id}">${object.title}</a></p>
       </div>
       `;
     } else {
       resultDiv.innerHTML += `
       <div class="menu-result-item">
-      <img class="Menu-movie-poster" src="placeholder.png" width="25%"></img>
+      <a href="movieinfo.html?movieId=${object.id}">
+      <img class="Menu-movie-poster" src="placeholder.png" width="25%" loading="lazy"></img>
+      </a>
       <p class="Menu-movie-title"><a href="movieinfo.html?movieId=${object.id}">${object.title}</a></p>
       </div>
       `;
