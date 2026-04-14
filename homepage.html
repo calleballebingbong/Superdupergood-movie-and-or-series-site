@@ -24,7 +24,14 @@
                 </ul>
             </nav>
         </div>
-        <input id="menuSearch" class="search-input" type="text" placeholder="Search for a movie...">
+        <input onblur="hidesearch()" onfocus="showsearch()" 
+        id="menuSearch" 
+        class="search-input" 
+        type="text" 
+        placeholder="Search for a movie..." 
+        onkeyup="menuSearchbar()">
+
+        <div class = "menu-search-results" id="menuSearchResults"></div>
         <div class="header-main-sm">
             <div class="header-main-sm-ig"></div>
             <div class="header-main-sm-yt"></div>
@@ -32,6 +39,7 @@
     </header>
 
 
-
+    <script src="tmbdapi.js"></script>
+    <script src="hideandshow.js"></script>
 </body>
 </html>

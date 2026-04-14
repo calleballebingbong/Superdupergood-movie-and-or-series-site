@@ -9,7 +9,7 @@
       // aronpa function och API och vänta
       let results = await search(searchTerm);
 
-      renderResults(results);
+      //renderResults(results);
       searchText.value = ""
       window.location.replace("resultpage.html?search=" + encodeURIComponent(searchTerm)); // Skicka sökterm till resultatsidan
     }
@@ -18,7 +18,7 @@
 
 async function performSearch(term) {
   let results = await search(term);
-  renderResults(results);
+  renderResults(results, term);
 }
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -63,13 +63,18 @@ async function search(searchString) {
 }
 
 
-function renderResults(results) {
+function renderResults(results, term) {
   let resultDiv = document.getElementById("searchresults");
   let searchForDiv = document.getElementById("searchFor");
   console.log("results: ", results);
-  let allObjects = results.results;
+  let allObjects = results.results || [];
   console.log(allObjects);
   resultDiv.innerHTML = ""; // återställ sökresultat
+  searchForDiv.innerHTML = "" //återställ header
+
+  searchForDiv.innerHTML +=`
+  <h1>Searching for: "${term}"</h1>
+  `
 
   if (allObjects.length === 0) {
     console.log("No results found");
@@ -128,7 +133,7 @@ function renderMenuResults(results) {
       <a href="movieinfo.html?movieId=${object.id}">
       <img class="Menu-movie-poster" src="placeholder.png" width="25%" loading="lazy"></img>
       </a>
-      <p class="Menu-movie-title"><a href="movieinfo.html?movieId=${object.id}">${object.title}</a></p>
+      <p class="Menu-movie-title"><a class="menu-title" href="movieinfo.html?movieId=${object.id}">${object.title}</a></p>
       </div>
       `;
     }

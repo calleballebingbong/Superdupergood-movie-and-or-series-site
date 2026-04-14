@@ -200,6 +200,11 @@ a:hover {
     gap: 10px;
 }
 
+#popularMovies .movie-item,
+#nowShowing .movie-item {
+    width: 200px;
+}
+
 
 .movie-poster {
 
@@ -216,6 +221,12 @@ a:hover {
     filter: blur(0%) ;
 }
 
+#popularMovies .movie-poster,
+#nowShowing .movie-poster {
+    width: 30%;
+    height: 150px;
+}
+
 .movie-poster:hover{
     border: 4px solid #977b1d;
 
@@ -228,6 +239,11 @@ a:hover {
     font-weight: 500;
     color: #ffffff;
     font-size: 1.1em;
+}
+
+#popularMovies .movie-title,
+#nowShowing .movie-title {
+    font-size: 0.9em;
 }
 
 .menu-result-item {
@@ -323,3 +339,39 @@ a:hover {
     scrollbar-width: none;
 }
 
+#popularMovies, #nowShowing{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    overflow-x: scroll;
+    justify-content: flex-start;
+    margin-top: 20px;
+    max-width: 95vw;
+    max-height: 250px;
+}
+
+/*Scrollbar for movies page*/
+#popularMovies::-webkit-scrollbar,
+#nowShowing::-webkit-scrollbar,
+.menu-search-results::-webkit-scrollbar {
+    height: 10px;
+}
+
+#popularMovies::-webkit-scrollbar-track,
+#nowShowing::-webkit-scrollbar-track,
+.menu-search-results::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#popularMovies::-webkit-scrollbar-thumb,
+#nowShowing::-webkit-scrollbar-thumb,
+.menu-search-results::-webkit-scrollbar-thumb {
+    background: rgb(87, 87, 87);
+    border-radius: 10px;
+}
+
+#popularMovies::-webkit-scrollbar-thumb:hover,
+#nowShowing::-webkit-scrollbar-thumb:hover,
+.menu-search-results::-webkit-scrollbar-thumb:hover {
+    background: rgb(65, 65, 65);
+}
