@@ -47,11 +47,40 @@
         </form>
     </div>
 
-    <div id="popularMovies"></div>
+    <hr>
 
-    <div id="nowShowing"></div>
+    <section class="movie-category">
+        <h2>Popular Movies:</h2>
+        <div id="popularMovies"></div>
+    </section>
 
-    
+    <section class="movie-category">
+        <h2>Now Showing:</h2>
+        <div id="nowShowing"></div>
+    </section>
+
+    <section class="movie-category">
+        <h2>Genre Filter</h2>
+        <label for="genreSelect">Choose genre:</label>
+        <select id="genreSelect">
+            <option value="">Select a genre</option>
+            <option value="28">Action</option>
+            <option value="35">Comedy</option>
+            <option value="18">Drama</option>
+            <option value="27">Horror</option>
+            <option value="10749">Romance</option>
+        </select>
+
+        <div id="genreMovies"></div>
+    </section>
+
+    <section class="movie-category">
+        <h2>New Releases</h2>
+        <div id="randomTrailersContainer">
+            <div id="randomTrailer1"></div>
+            <div id="randomTrailer2"></div>
+        </div>
+    </section>
 
     <script src="tmbdapi.js"></script>
     <script src="hideandshow.js"></script>

@@ -63,6 +63,7 @@ async function search(searchString) {
 }
 
 
+
 function renderResults(results, term) {
   let resultDiv = document.getElementById("searchresults");
   let searchForDiv = document.getElementById("searchFor");
@@ -99,6 +100,21 @@ function renderResults(results, term) {
     `;
   }
 }
+
+updateShowMoreButtonVisibility(); //fix / optimise
+
+function showMoreResults() {
+  const showMoreButton = document.getElementById("showMoreButton");
+  const searchResultsDiv = document.getElementById("searchresults");
+  const buttonStyle = window.getComputedStyle(showMoreButton).display;
+
+  if (buttonStyle !== "none") {
+    searchResultsDiv.style.maxHeight = "none";
+    searchResultsDiv.style.overflow = "visible";
+    showMoreButton.style.display = "none";
+  }
+}
+
 
 function renderMenuResults(results) {
   let resultDiv = document.getElementById("menuSearchResults");
