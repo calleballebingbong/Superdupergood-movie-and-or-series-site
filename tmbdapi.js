@@ -37,12 +37,13 @@ async function menuSearchbar() {
 
   if (searchTerm.length > 0) {
     menuDiv.style.visibility = "visible";
+    menuDiv.style.display = "block";
     let results = await search(searchTerm);
     renderMenuResults(results);
   } else{
     menuDiv.innerHTML = "";
     menuDiv.style.visibility = "hidden";
-
+    menuDiv.style.display = "none";
   }
 }
 

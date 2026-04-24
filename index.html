@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="site.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
@@ -9,10 +8,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="site.css">
+    <link rel="stylesheet" href="homepage.css">
     <script src="Key.js"></script>
 </head>
 <body>
-    <header class="header-main">
+        <header class="header-main">
         <div class="header-main-logo">
             <img src="logo.svg" alt="logo" class="logo">
             <nav class="header-main-nav">
@@ -38,17 +39,59 @@
         </div>
     </header>
 
-    <section class="hero-image">
+<section class="hero-carousel">
+    <input type="radio" name="hero-slide" id="slide1" checked>
+    <input type="radio" name="hero-slide" id="slide2">
+    <input type="radio" name="hero-slide" id="slide3">
+    
+    <div class="hero-slide">
+        <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://image.tmdb.org/t/p/w1280/2P8l5Gys1h9a7gNj1QZBmjmYZ4X.jpg')"></div>
         <div class="hero-text">
-            <h1>Welcome to Movie Maven!</h1>
-            <p>Discover your next favorite movie!</p>
-            <button class="get-started-btn" onclick="window.location.href='movies.html'">Get Started</button>
+            <h1>Discover Blockbusters</h1>
+            <p>Find your next watch!</p>
+            <button class="get-started-btn" onclick="window.location.href='movies.html'">Explore our Collection</button>
+        </div>
+    </div>
+    
+    <div class="hero-slide">
+        <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://image.tmdb.org/t/p/w1280/6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg')"></div>
+        <div class="hero-text">
+            <h1>Explore Our Collection</h1>
+            <p>Search for over 1.3 million titles!</p>
+            <form>
+                    <input type="text" id="txtSearch" placeholder="Search for movies" />
+            </form>
+        </div>
+    </div>
+    
+    <div class="hero-slide">
+        <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://image.tmdb.org/t/p/w1280/8k3S8pUdTq8pmsMVm9xU2m1vslM.jpg')"></div>
+        <div class="hero-text">
+            <h1>Trouble choosing?</h1>
+            <p>Pick a random movie!</p>
+            <button class="get-started-btn" onclick="window.location.href='movies.html'">Take a Chance</button>
+        </div>
+    </div>
+    
+    <label for="slide1" class="hero-dot"></label>
+    <label for="slide2" class="hero-dot"></label>
+    <label for="slide3" class="hero-dot"></label>
+</section>
+
+    <section id="infoPage">
+        <div class="search-container">
+            <h2>Top Rated Movies:</h2>
+            <div id="topRatedMovies"></div>
+            
+            <h2>Upcoming Movies:</h2>
+            <div id="upcomingMovies"></div>
         </div>
     </section>
 
 
     <script src="tmbdapi.js"></script>
     <script src="hideandshow.js"></script>
+    <script src="loadMovies.js"></script>
     <script src="getRandomImage.js"></script>
 </body>
 </html>

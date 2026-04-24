@@ -34,21 +34,6 @@ async function loadMovies(endpoint, divId, noResultsMessage) {
     }
 }
 
-const genreSelect = document.getElementById("genreSelect");
-genreSelect.addEventListener("change", () => {
-    const selectedGenre = genreSelect.value;
-    if (!selectedGenre) {
-        document.getElementById("genreMovies").innerHTML = "";
-        return;
-    }
-
-    loadMovies(
-        `discover/movie?with_genres=${selectedGenre}`,
-        "genreMovies",
-        "No movies found for this genre"
-    );
-});
-
 async function loadTwoRandomTrailers() {
     const container1 = document.getElementById("randomTrailer1");
     const container2 = document.getElementById("randomTrailer2");
@@ -101,9 +86,25 @@ async function loadTrailerForContainer(movie, container) {
     }
 }
 
-
 window.addEventListener("DOMContentLoaded", () => {
     loadMovies("movie/popular", "popularMovies", "No popular movies found");
     loadMovies("movie/now_playing", "nowShowing", "No movies currently playing found");
+    loadMovies("movie/upcoming", "upcomingMovies", "No upcoming movies found");
+    loadMovies("movie/top_rated", "topRatedMovies", "No top rated movies found");
     loadTwoRandomTrailers();
+});
+
+const genreSelect = document.getElementById("genreSelect");
+genreSelect.addEventListener("change", () => {
+    const selectedGenre = genreSelect.value;
+    if (!selectedGenre) {
+        document.getElementById("genreMovies").innerHTML = "";
+        return;
+    }
+
+    loadMovies(
+        `discover/movie?with_genres=${selectedGenre}`,
+        "genreMovies",
+        "No movies found for this genre"
+    );
 });
