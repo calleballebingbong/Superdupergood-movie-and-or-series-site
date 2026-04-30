@@ -1,0 +1,22 @@
+#searchFor {
+    font-family: 'Rethink Sans', sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+#searchresults {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-height: 350px;
+    overflow: hidden;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#showMoreButton {
+    display: block;
+    margin: 20px auto;
+}

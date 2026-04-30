@@ -21,7 +21,7 @@
                     <li><a href="index.html">HOME</a></li>
                     <li><a href="movies.html">MOVIES</a></li>
                     <li><a href="#">ABOUT US</a></li>
-                    <li><a href="#">CONTACT</a></li>
+                    <li><a href="contactUs.html">CONTACT</a></li>
                 </ul>
             </nav>
         </div>
@@ -80,11 +80,44 @@
 
     <section id="infoPage">
         <div class="search-container">
-            <h2>Top Rated Movies:</h2>
-            <div id="topRatedMovies"></div>
-            
-            <h2>Upcoming Movies:</h2>
-            <div id="upcomingMovies"></div>
+            <h2><a href="movies.html">Our titles:</a></h2>
+            <div id="popularMovies"></div>
+        </div>
+
+        <div id="aboutUs">
+            <h2 class="aboutHead">What do we do?</h2>
+            <div id="info">
+                <p class="infoText">Welcome to Movie Maven! 
+                    Here our goal is to help you find new movie recommendations by supplying a range of options! 
+                    <br>                
+                    By using <a href="https://www.themoviedb.org/">The Movie Data Base(TMBD)</a> we are able to pull millions of different titles! 
+                    We hope you enjoy this site and wish you luck on your cinematic endeavours!</p>
+                <img class="infoImg" src="seats.jpg">
+            </div>
+        </div>
+        
+        <div class="contactUs">
+            <h1>Contact us!</h1>
+            <div class="container">
+                <form id="contactForm" novalidate>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    
+                    <label for="reason">Reason:</label>
+                    <select id="reason" name="reason">
+                        <option value="feedback">Feedback</option>
+                        <option value="complaint">Complaint</option>
+                        <option value="other">Other</option>
+                    </select>
+                    
+                    <label for="subject">Subject</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.." required></textarea>
+                    
+                    <input type="submit" value="Submit">
+                    
+                    <div id="formMessage" class="message hidden"></div>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -93,5 +126,6 @@
     <script src="hideandshow.js"></script>
     <script src="loadMovies.js"></script>
     <script src="getRandomImage.js"></script>
+    <script src="contactValidator.js"></script>
 </body>
 </html>

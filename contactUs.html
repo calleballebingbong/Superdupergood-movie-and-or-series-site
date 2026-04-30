@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="site.css">
-<link rel="stylesheet" href="search.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
@@ -10,10 +8,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="site.css">
+    <link rel="stylesheet" href="homepage.css">
     <script src="Key.js"></script>
 </head>
 <body>
-    <header class="header-main">
+        <header class="header-main">
         <div class="header-main-logo">
             <img src="logo.svg" alt="logo" class="logo">
             <nav class="header-main-nav">
@@ -39,14 +39,36 @@
         </div>
     </header>
 
-    <div id="searchFor"></div>
+    <section>
+        <div class="contactUs">
+            <h1>Contact us!</h1>
+            <div class="container">
+                <form id="contactForm" novalidate>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    
+                    <label for="reason">Reason:</label>
+                    <select id="reason" name="reason">
+                        <option value="feedback">Feedback</option>
+                        <option value="complaint">Complaint</option>
+                        <option value="other">Other</option>
+                    </select>
+                    
+                    <label for="subject">Subject</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.." required></textarea>
+                    
+                    <input type="submit" value="Submit">
+                    
+                    <div id="formMessage" class="message hidden"></div>
+                </form>
+            </div>
+        </div>
+    </section>
 
-    <hr>
-
-    <div id="searchresults"></div>
-    <button id ="showMoreButton" class="get-started-btn" onclick="showMoreResults()">Show More</button>
 
     <script src="tmbdapi.js"></script>
     <script src="hideandshow.js"></script>
+    <script src="loadMovies.js"></script>
+    <script src="contactValidator.js"></script>
 </body>
 </html>

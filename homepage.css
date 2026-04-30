@@ -1,3 +1,7 @@
+body{
+    overflow-x: hidden;
+}
+
 #slide1,#slide2,#slide3 {
     display: none;
 }
@@ -126,13 +130,120 @@
 
 #infoPage {
     background-color: #301212;
+    color: #fff;
+    font-family: 'Rethink Sans', sans-serif;
     display: flex;
-    position: sticky;
-    top:0;
+    position: relative;
     border-top: #640D14 solid 10px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     font-size: larger;
+    gap: 10px;
+}
+
+#infoPage .search-container {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#aboutUs {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 1200px;
+    padding: 40px;
+    margin: 0 auto;
+}
+
+.aboutHead {
+    text-align: center;
+    width: 100%;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    margin: 0;
+}
+
+/* Image + Text container */
+#aboutUs > div {
+    display: flex;
+    gap: 16px;               /* Reduced spacing between image/text */
+    align-items: flex-start; /* Top alignment */
+    width: 100%;
+}
+
+.infoImg {
+    flex: 0 0 500px;         /* Fixed 500px width */
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    margin: 0;               /* No extra margins */
+}
+
+.infoText {
+    flex: 1;                 /* Takes remaining space */
+    padding: 0;              /* ← NO PADDING = NO GAP */
+    margin: 0;               /* No margins */
+    font-size: 2rem;
+    line-height:1.4;
+    margin-top: 5%;
+    color: #fff;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    #aboutUs > div {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .infoImg {
+        flex: none;
+        width: 100%;
+        max-width: 400px;
+        height: 300px;
+    }
+}
+
+/* Auto-scrolling movie sections */
+#topRatedMovies,
+#upcomingMovies,
+#popularMovies,
+#nowShowing {
+    display: flex;
+    overflow: hidden;
     gap: 20px;
+    padding: 20px 0;
+    scrollbar-width: none;          /* Hide scrollbar Firefox */
+    -ms-overflow-style: none;       /* Hide scrollbar IE/Edge */
+}
+
+#topRatedMovies::-webkit-scrollbar,
+#upcomingMovies::-webkit-scrollbar,
+#popularMovies::-webkit-scrollbar,
+#nowShowing::-webkit-scrollbar {
+    display: none;                  /* Hide scrollbar Chrome/Safari */
+}
+
+#topRatedMovies:hover,
+#upcomingMovies:hover,
+#popularMovies:hover,
+#nowShowing:hover {
+    cursor: pointer;
+}
+
+/* Movie items */
+.movie-item {
+    flex: 0 0 250px;              /* Fixed width cards */
+    scroll-snap-align: start;     /* Snap to each movie */
+    transition: transform 0.3s ease;
+}
+
+.movie-item:hover {
+    transform: scale(1.05);       /* Hover lift */
+    z-index: 10;
 }

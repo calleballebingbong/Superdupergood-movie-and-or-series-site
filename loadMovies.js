@@ -14,7 +14,7 @@ async function loadMovies(endpoint, divId, noResultsMessage) {
         resultDiv.innerHTML = `<p>${noResultsMessage}</p>`;
         return;
     }
-
+    
     for (let index = 0; index < allObjects.length; index++) {
         const object = allObjects[index];
         const posterSrc = object.poster_path
@@ -23,7 +23,7 @@ async function loadMovies(endpoint, divId, noResultsMessage) {
 
         resultDiv.innerHTML += `
         <div class="movie-item">
-            <a style="width: 350px; cursor: default;" href="movieinfo.html?movieId=${object.id}">
+            <a class="movie-link" href="movieinfo.html?movieId=${object.id}">
                 <img class="movie-poster" src="${posterSrc}" alt="${object.title}" loading="lazy">
             </a>
             <p class="movie-title">
@@ -32,6 +32,46 @@ async function loadMovies(endpoint, divId, noResultsMessage) {
         </div>
         `;
     }
+
+    if (['popularMovies', 'nowShowing', 'upcomingMovies', 'topRatedMovies'].includes(divId)) {
+        setupInfiniteMovies(resultDiv);
+    }
+}
+
+function setupInfiniteMovies(resultDiv) {
+    if (!resultDiv || resultDiv.dataset.loopSetup === "true") return;
+
+    const originalHTML = resultDiv.innerHTML;
+    resultDiv.innerHTML += originalHTML;
+    resultDiv.dataset.loopSetup = "true";
+    resultDiv.dataset.paused = "false";
+
+    const speed = 0.4;
+
+    function step() {
+        if (resultDiv.dataset.paused === "true") {
+            requestAnimationFrame(step);
+            return;
+        }
+
+        resultDiv.scrollLeft += speed;
+        const halfWidth = resultDiv.scrollWidth / 2;
+        if (resultDiv.scrollLeft >= halfWidth) {
+            resultDiv.scrollLeft -= halfWidth;
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    resultDiv.addEventListener("mouseenter", () => {
+        resultDiv.dataset.paused = "true";
+    });
+    resultDiv.addEventListener("mouseleave", () => {
+        resultDiv.dataset.paused = "false";
+    });
+
+    resultDiv.scrollLeft = 0;
+    requestAnimationFrame(step);
 }
 
 async function loadTwoRandomTrailers() {
