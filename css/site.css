@@ -480,3 +480,37 @@ hr {
     display: none;
 }
 
+table {
+    margin: 40px auto;
+    width: 90%;
+    max-width: 800px;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'Rethink Sans', sans-serif;
+}
+
+table th {
+    background-color: #640D14;
+    color: #ffffff;
+    padding: 18px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1rem;
+    border-bottom: 3px solid #8b141f;
+    letter-spacing: 0.05em;
+}
+
+table td {
+    padding: 16px 20px;
+    color: #f0f0f0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.95rem;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+    background-color: rgba(137, 0, 0, 0.221);;
+}
+

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="site.css">
-<link rel="stylesheet" href="search.css">
+<link rel="stylesheet" href="../css/site.css">
+<link rel="stylesheet" href="../css/movieinfo.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
@@ -10,43 +10,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="Key.js"></script>
+    <script src="../js/Key.js"></script>
 </head>
 <body>
+
+    <style>
+        body{
+            overflow: hidden;
+        }
+    </style>
+
     <header class="header-main">
         <div class="header-main-logo">
-            <img src="logo.svg" alt="logo" class="logo">
+            <img src="../images/logo.svg" alt="logo" class="logo">
             <nav class="header-main-nav">
                 <ul>
                     <li><a href="index.html">HOME</a></li>
                     <li><a href="movies.html">MOVIES</a></li>
-                    <li><a href="#">ABOUT US</a></li>
+                    <li><a href="aboutUs.html">ABOUT US</a></li>
                     <li><a href="contactUs.html">CONTACT</a></li>
                 </ul>
             </nav>
         </div>
-        <input onblur="hidesearch()" onfocus="showsearch()" 
-        id="menuSearch" 
-        class="search-input" 
-        type="text" 
-        placeholder="Search for a movie..." 
-        onkeyup="menuSearchbar()">
+        <input onblur="hidesearch()" id="menuSearch" class="search-input" type="text" placeholder="Search for a movie..." onkeyup="menuSearchbar()">
+        <div class = "menu-search-results" id="menuSearchResults">
+            <div id="searchresults"></div>
 
-        <div class = "menu-search-results" id="menuSearchResults"></div>
+        </div>
         <div class="header-main-sm">
             <div class="header-main-sm-ig"></div>
             <div class="header-main-sm-yt"></div>
         </div>
     </header>
+    <button id="backButton" onclick="window.history.back()">&#8592</button>
 
-    <div id="searchFor"></div>
+    <div id="details">
+        <div id="detailstxt"></div>
+    </div>
 
-    <hr>
-
-    <div id="searchresults"></div>
-    <button id ="showMoreButton" class="get-started-btn" onclick="showMoreResults()">Show More</button>
-
-    <script src="tmbdapi.js"></script>
-    <script src="hideandshow.js"></script>
+    <script src="../js/tmbdapi.js"></script>
+    <script src="../js/hideandshow.js"></script>
+    <script src="../js/movieinfo.js"></script>
 </body>
 </html>
