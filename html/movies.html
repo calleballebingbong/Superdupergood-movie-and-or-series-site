@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/site.css">
-    <link rel="stylesheet" href="../css/movies.css">
+    <link rel="stylesheet" href="../css/homepage.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
@@ -38,18 +38,29 @@
         </div>
     </header>
 
-    <!-- Search -->
-    <div class="search-container">   
+    <section class="hero-carousel">
+    <input type="radio" name="hero-slide" id="slide1" checked>
+    <input type="radio" name="hero-slide" id="slide2">
+    <input type="radio" name="hero-slide" id="slide3">
+    
+    <div class="hero-slide">
+        <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://image.tmdb.org/t/p/w1280/2P8l5Gys1h9a7gNj1QZBmjmYZ4X.jpg')"></div>
+        <div class="hero-text">
+        <div style="background-color: transparent;" class="search-container">   
         <h1>Search for a Movie</h1>
 
         <form>
             <input type="text" id="txtSearch" placeholder="Search for movies">
         </form>
     </div>
+        </div>
+    </div>
+    </section>
 
-    <hr>
-
-    <section class="movie-category">
+    
+    <section id="infoPage">
+        <div id="aboutUs">
+                <section class="movie-category">
         <h2>Popular Movies:</h2>
         <div id="popularMovies"></div>
     </section>
@@ -81,10 +92,12 @@
             <div id="randomTrailer2"></div>
         </div>
     </section>
+        </div>
 
     <script src="../js/tmbdapi.js"></script>
     <script src="../js/hideandshow.js"></script>
     <script src="../js/loadMovies.js"></script>
+    <script src="../js/getRandomImage.js"></script>
 
 </body>
 

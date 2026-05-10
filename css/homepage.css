@@ -136,6 +136,7 @@ body{
     position: relative;
     border-top: #640D14 solid 10px;
     justify-content: center;
+    text-align: center;
     align-items: center;
     flex-direction: column;
     font-size: larger;

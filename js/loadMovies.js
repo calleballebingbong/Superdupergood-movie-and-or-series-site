@@ -150,19 +150,31 @@ window.addEventListener("DOMContentLoaded", () => {
     loadTwoRandomTrailers();
 });
 
-const genreSelect = document.getElementById("genreSelect");
-if (genreSelect) {
-    genreSelect.addEventListener("change", () => {
-        const selectedGenre = genreSelect.value;
-        if (!selectedGenre) {
-            document.getElementById("genreMovies").innerHTML = "";
-            return;
-        }
-
-        loadMovies(
-            `discover/movie?with_genres=${selectedGenre}`,
-            "genreMovies",
-            "No movies found for this genre"
-        );
-    });
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const genreSelect = document.getElementById("genreSelect");
+    if (genreSelect) {
+        genreSelect.addEventListener("change", async (e) => {
+            const genreId = e.target.value;
+            const genreMovies = document.getElementById("genreMovies");
+            
+            if (!genreId || !genreMovies) return;
+            
+            genreMovies.innerHTML = "<p>Loading...</p>";
+            
+            try {
+                const url = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDBapiKey}&with_genres=${genreId}&language=en-US`;
+                const response = await fetch(url);
+                
+                if (!response.ok) throw new Error(`API ${response.status}`);
+                
+                const data = await response.json();
+                genreMovies.innerHTML = "";
+                
+                data.results.forEach(movie => renderMovieItem(movie, genreMovies));
+            } catch (error) {
+                console.error("Genre error:", error);
+                genreMovies.innerHTML = `<p>Error loading genre</p>`;
+            }
+        });
+    }
+});
