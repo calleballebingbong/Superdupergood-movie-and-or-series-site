@@ -43,11 +43,11 @@ hr {
     width: 90%;
 }
 
-.menu-title{
+.menu-title a{
     color: #3f080d;
 }
 
-.menu-title:hover {
+.menu-title a:hover {
     color:#a50b18
 }
 
@@ -242,7 +242,7 @@ hr {
     z-index: 6;
     cursor: pointer;
     transition: filter 1s;
-    filter: blur(0%) ;
+    filter: blur(0);
 }
 
 #popularMovies .movie-poster,

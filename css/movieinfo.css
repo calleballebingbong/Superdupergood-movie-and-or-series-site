@@ -29,7 +29,7 @@
     height: 100%;
     max-width: 800px;
     border-radius: 10px;
-    background-color: none;
+    background-color: transparent;
     color: #ffffff;
     border: none;
     font-family: 'Rethink Sans', sans-serif;

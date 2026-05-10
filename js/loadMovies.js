@@ -1,40 +1,42 @@
+const TMDB_BASE = 'https://api.themoviedb.org/3';
+const IMAGE_BASE = 'https://image.tmdb.org/t/p';
+
 async function loadMovies(endpoint, divId, noResultsMessage) {
     const resultDiv = document.getElementById(divId);
-    const apiKey = TMDBapiKey;
-    const separator = endpoint.includes("?") ? "&" : "?";
-    const url = `https://api.themoviedb.org/3/${endpoint}${separator}api_key=${apiKey}`;
-
-    const response = await fetch(url);
-    const json = await response.json();
-
-    const allObjects = json.results || [];
-    resultDiv.innerHTML = "";
-
-    if (allObjects.length === 0){
-        resultDiv.innerHTML = `<p>${noResultsMessage}</p>`;
+    if (!resultDiv) {
+        console.log(`Skipping ${divId} - container missing`);
         return;
     }
     
-    for (let index = 0; index < allObjects.length; index++) {
-        const object = allObjects[index];
-        const posterSrc = object.poster_path
-        ? `https://image.tmdb.org/t/p/w500${object.poster_path}`
-        : "placeholder.png";
+    try {
+        resultDiv.innerHTML = "";
+        
+        const apiKey = TMDBapiKey;
+        const url = `https://api.themoviedb.org/3/${endpoint}?api_key=${apiKey}`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            resultDiv.innerHTML = `<p>Error loading movies</p>`;
+            return;
+        }
+        
+        const json = await response.json();
+        const allObjects = json.results || [];
+        
+        if (allObjects.length === 0) {
+            resultDiv.innerHTML = `<p>${noResultsMessage}</p>`;
+            return;
+        }
+        
+        allObjects.forEach(object => {
+            renderMovieItem(object, resultDiv);
+        });
+        
+        setupInfiniteMovies(resultDiv)
 
-        resultDiv.innerHTML += `
-        <div class="movie-item">
-            <a class="movie-link" href="movieinfo.html?movieId=${object.id}">
-                <img class="movie-poster" src="${posterSrc}" alt="${object.title}" loading="lazy">
-            </a>
-            <p class="movie-title">
-                <a href="movieinfo.html?movieId=${object.id}">${object.title}</a>
-            </p>
-        </div>
-        `;
-    }
-
-    if (['popularMovies', 'nowShowing', 'upcomingMovies', 'topRatedMovies'].includes(divId)) {
-        setupInfiniteMovies(resultDiv);
+    } catch (error) {
+        console.error(`Load ${endpoint} failed:`, error);
+        resultDiv.innerHTML = `<p>Failed to load movies</p>`;
     }
 }
 
@@ -78,11 +80,16 @@ async function loadTwoRandomTrailers() {
     const container1 = document.getElementById("randomTrailer1");
     const container2 = document.getElementById("randomTrailer2");
 
-    container1.innerHTML = "<p>Loading...</p>";
-    container2.innerHTML = "<p>Loading...</p>";
+    if (!container1 && !container2){
+        console.log("No trailer containers found - skipping")
+        return;
+    }
+
+    if (container1) container1.innerHTML = "<p>Loading...</p>";
+    if (container2) container2.innerHTML = "<p>Loading...</p>";
 
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDBapiKey}`);
+        const response = await fetch(`${TMDB_BASE}/movie/now_playing?api_key=${TMDBapiKey}`);
         if (!response.ok) {
             throw new Error("Failed to fetch now playing movies");
         }
@@ -106,7 +113,7 @@ async function loadTwoRandomTrailers() {
 
 async function loadTrailerForContainer(movie, container) {
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${TMDBapiKey}`);
+        const response = await fetch(`${TMDB_BASE}/movie/${movie.id}/videos?api_key=${TMDBapiKey}`);
         if (!response.ok) {
             throw new Error(`Failed to fetch videos for movie ID ${movie.id}`);
         }
@@ -127,24 +134,35 @@ async function loadTrailerForContainer(movie, container) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    loadMovies("movie/popular", "popularMovies", "No popular movies found");
-    loadMovies("movie/now_playing", "nowShowing", "No movies currently playing found");
-    loadMovies("movie/upcoming", "upcomingMovies", "No upcoming movies found");
-    loadMovies("movie/top_rated", "topRatedMovies", "No top rated movies found");
+    const containers = {
+        popularMovies: document.getElementById("popularMovies"),
+        nowShowing: document.getElementById("nowShowing"),
+        upcomingMovies: document.getElementById("upcomingMovies"),
+        topRatedMovies: document.getElementById("topRatedMovies")
+    };
+    
+    if (containers.popularMovies) {
+        loadMovies("movie/popular", "popularMovies", "No popular movies found");
+    }
+    if (containers.nowShowing) {
+        loadMovies("movie/now_playing", "nowShowing", "No movies currently playing found");
+    }
     loadTwoRandomTrailers();
 });
 
 const genreSelect = document.getElementById("genreSelect");
-genreSelect.addEventListener("change", () => {
-    const selectedGenre = genreSelect.value;
-    if (!selectedGenre) {
-        document.getElementById("genreMovies").innerHTML = "";
-        return;
-    }
+if (genreSelect) {
+    genreSelect.addEventListener("change", () => {
+        const selectedGenre = genreSelect.value;
+        if (!selectedGenre) {
+            document.getElementById("genreMovies").innerHTML = "";
+            return;
+        }
 
-    loadMovies(
-        `discover/movie?with_genres=${selectedGenre}`,
-        "genreMovies",
-        "No movies found for this genre"
-    );
-});
+        loadMovies(
+            `discover/movie?with_genres=${selectedGenre}`,
+            "genreMovies",
+            "No movies found for this genre"
+        );
+    });
+}
