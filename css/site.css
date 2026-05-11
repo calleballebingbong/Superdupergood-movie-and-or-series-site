@@ -140,13 +140,15 @@ hr {
 .search-input {
     margin: auto;
     margin-right: 10px;
-    width: 400px;
-    height: 30px;
+    width: calc(100% - 120px);
+    max-width: 420px;
+    height: 34px;
     border-radius: 15px;
     border: none;
-    padding: 2px 10px;
+    padding: 6px 12px;
     font-family: 'Rethink Sans', sans-serif;
     font-weight: 400;
+    box-sizing: border-box;
 }
 
 .search-container {
@@ -172,23 +174,29 @@ hr {
 }
 
 .menu-search-results {
-    position: absolute;
-    top: 55px;
-    right: 220px;
-    width: 300px;
-    height: 300px;
-
-    max-height: 250px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: white;
-    border: 10px solid#640D14;
-
-    display: block;
+    position: fixed !important;  /* Fixed to viewport */
+    top: 50px;  /* Under mobile header */
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-height: 50vh;  /* Half screen */
+    max-width: 400px;
+    margin: 0 auto;  /* Center */
+    padding: 15px;
+    border: 2px solid #640D14;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     overflow-y: auto;
     overflow-x: hidden;
+    z-index: 3000 !important;  /* Above everything */
     visibility: hidden;
-    z-index: 2000;
+    display: none;  /* JS controls */
+}
+
+/* Ensure header doesn't clip */
+.header-main {
+    overflow: visible !important;
 }
 
 .contactUs .menu-search-results {
@@ -196,13 +204,15 @@ hr {
 }
 
 #txtSearch {
-    width: 400px;
-    height: 30px;
+    width: calc(100% - 40px);
+    max-width: 480px;
+    height: 34px;
     border-radius: 15px;
     border: none;
-    padding: 2px 10px;
+    padding: 8px 12px;
     font-family: 'Rethink Sans', sans-serif;
     font-weight: 400;
+    box-sizing: border-box;
 }
 
 .movie-item {

@@ -1,0 +1,203 @@
+/* Mobile-first base styles (0-767px) */
+
+:root{
+    --header-height: 60px;
+}
+
+body {
+    background-color: #301212;
+    margin: 0;
+    font-size: 16px; /* Base for rem/em scaling */
+}
+
+/* Header / nav */
+.header-main {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: #640D14;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1100;
+    box-sizing: border-box;
+}
+
+.header-main-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-main-logo img.logo {
+    height: 40px; /* Smaller logo on mobile */
+    max-width: 120px;
+}
+
+.hamburger {
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    min-height: 44px; /* Touch target */
+    min-width: 44px;
+}
+
+/* Overlay nav that appears under the header when open */
+.header-main-nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    height: calc(100vh - var(--header-height));
+    background-color: rgba(100,13,20,0.98);
+    backdrop-filter: blur(6px);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px) scaleY(0.995);
+    transition: opacity 220ms ease, transform 220ms ease, visibility 0s linear 220ms;
+    z-index: 2000;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 8px;
+}
+
+.header-main-nav.mobile-open {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+}
+
+.header-main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.header-main-nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    min-height: 48px;
+}
+
+/* Search inputs */
+.search-input, #txtSearch {
+    width: calc(100% - 40px);
+    max-width: 480px;
+    height: 44px; /* Touch friendly */
+    margin: 10px 20px;
+    box-sizing: border-box;
+}
+
+.menu-search-results {
+    position: fixed;
+    top: var(--header-height);
+    right: 10px;
+    left: 10px;
+    max-height: 50vh;
+    border: 1px solid #640D14; /* Thinner border */
+    z-index: 3001;
+    background: #fff;
+}
+
+/* Hero */
+.hero-carousel {
+    height: 50vh; /* Shorter on mobile */
+    min-height: 300px;
+}
+
+.hero-text {
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
+    padding: 18px 16px;
+    max-width: 95%;
+}
+
+.hero-text p {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+}
+
+.hero-dot {
+    bottom: 20px;
+    width: 12px;
+    height: 12px;
+}
+
+/* Movie lists */
+#popularMovies, #nowShowing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    padding: 10px;
+}
+
+.movie-item {
+    width: 90vw;
+    max-width: 280px;
+    flex: none;
+    margin: 0 auto 12px auto;
+}
+
+.movie-poster {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.infoImg {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: cover;
+}
+
+.contactUs .container {
+    padding: 20px;
+    max-width: 100%;
+}
+
+.contactUs input, .contactUs select, .contactUs textarea {
+    width: 100%;
+    height: 44px; /* Touch target */
+    box-sizing: border-box;
+}
+
+.contactUs textarea {
+    height: 120px;
+}
+
+/* Tablet+ (min-width) */
+@media (min-width: 768px) {
+    :root{ --header-height: 60px; }
+    .hamburger { display: none; }
+    .header-main { height: var(--header-height); padding: 0 20px; }
+    .header-main-logo img.logo { height: 70px; }
+    .header-main-nav { position: static; visibility: visible; opacity: 1; transform: none; height: auto; background: transparent; padding: 0; }
+    .header-main-nav ul { flex-direction: row; gap: 8px; align-items: center; }
+    .header-main-nav ul li a { padding: 0 10px; line-height: var(--header-height); border: none; }
+    .hero-carousel { height: calc(100vh - var(--header-height)); }
+    #popularMovies { flex-direction: row; overflow-x: auto; }
+    .movie-item { width: 240px; flex: 0 0 240px; margin: 0 8px; }
+    .search-input, #txtSearch { width: 360px; max-width: 50vw; }
+}
+
+/* Desktop (min-width) */
+@media (min-width: 1024px) {
+    .search-input, #txtSearch { width: 420px; max-width: 44vw; }
+}

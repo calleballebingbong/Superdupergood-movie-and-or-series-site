@@ -1,14 +1,13 @@
+/* Movie info page styles (clean, responsive) */
+
 #backButton {
-    display: flex;
+    display: inline-flex;
     margin-top: 10px;
     margin-left: 5px;
-    padding-bottom: 5px;
-    max-width: 100px;
-    max-height: 30px;
+    padding: 6px 10px;
     justify-content: center;
     align-items: center;
-    width: 5%;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 10px;
     border: none;
     background-color: #2d2d2d;
@@ -23,11 +22,10 @@
 }
 
 #details {
-    margin: 20px;
-    padding: 20px;
+    margin: 12px;
+    padding: 16px;
     width: 100%;
-    height: 100%;
-    max-width: 800px;
+    max-width: 900px;
     border-radius: 10px;
     background-color: transparent;
     color: #ffffff;
@@ -35,14 +33,17 @@
     font-family: 'Rethink Sans', sans-serif;
     font-weight: 400;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 12px;
 }
 
 .info-poster {
-    width: 300px;
-    height: 450px;
-    margin-top: -25px;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    aspect-ratio: 2/3;
+    margin-top: -10px;
     object-fit: cover;
     border-radius: 10px;
     border: 4px solid #D4AF37;
@@ -50,15 +51,25 @@
 }
 
 .info-text-container {
-    margin-top: -50px;
+    margin-top: 0;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     flex: 1;
 }
 
 .info-txt {
     overflow: auto;
-    max-height: 100px;
+    max-height: 240px;
     scrollbar-width: none;
+}
+
+/* Larger screens: place poster and text side-by-side */
+@media (min-width: 768px) {
+    #details {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .info-poster { margin-top: -25px; }
+    .info-text-container { margin-top: -50px; }
 }
